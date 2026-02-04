@@ -36,15 +36,17 @@ $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <h2>Liste des contacts</h2>
 
-    <?php if (count($contacts) > 0) : ?>
-        <?php foreach ($contacts as $contact) : ?>
-            <p>
-                <?php echo $contact['prenom'] . " " . $contact['nom'] . " - " . $contact['email']; ?>
-            </p>
-        <?php endforeach; ?>
-    <?php else : ?>
-        <p>Aucun contact enregistré.</p>
-    <?php endif; ?>
+<?php foreach ($contacts as $contact) : ?>
+    <p>
+        <?php echo $contact['prenom'] . " " . $contact['nom'] . " - " . $contact['email']; ?>
+        - <a href="detail.php?id=<?php echo $contact['id']; ?>">Voir</a>
+        - <a href="modifier.php?id=<?php echo $contact['id']; ?>">Modifier</a>
+        - <a href="supprimer.php?id=<?php echo $contact['id']; ?>"
+             onclick="return confirm('Es-tu sûr de vouloir supprimer ce contact ?');">
+             Supprimer
+          </a>
+    </p>
+<?php endforeach; ?>
 
 </body>
 </html>
